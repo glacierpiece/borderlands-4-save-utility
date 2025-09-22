@@ -41,7 +41,7 @@ Both scripts work by dragging and dropping a `.sav` or `.yaml` file onto them. T
 
 `blcrypt-helper-Item-serials.py` should be used when you want to preserve item serial numbers during decryption and encryption.
 
-**IMPORTANT:** You must have a `STEAMID.txt` file in the same directory as the scripts. This file must contain your Steam64 ID.
+**IMPORTANT:** You must have a `STEAMID.txt` file in the same directory as the scripts. This file must contain your Steam ID.
 
 ### Command-line Usage
 ---
@@ -207,6 +207,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 
 
 
