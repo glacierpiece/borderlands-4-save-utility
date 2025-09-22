@@ -27,7 +27,25 @@ python blcrypt.py decrypt --help
 python blcrypt.py encrypt --help
 ```
 
-### Save Decrypt/Encrypt 
+### Helper Scripts
+
+For ease of use, you can use the provided helper scripts:
+
+-   `blcrypt-helper.py`
+-   `blcrypt-helper-Item-serials.py`
+
+Both scripts work by dragging and dropping a `.sav` or `.yaml` file onto them. They will automatically detect the file type and either encrypt or decrypt it.
+
+-   **Drag a `.sav` file:** Decrypts the save to a `.yaml` file.
+-   **Drag a `.yaml` file:** Encrypts the yaml to a `.sav` file.
+
+`blcrypt-helper-Item-serials.py` should be used when you want to preserve item serial numbers during decryption and encryption.
+
+**IMPORTANT:** You must have a `STEAMID.txt` file in the same directory as the scripts. This file must contain your Steam ID.
+
+### Command-line Usage
+---
+## Save Decrypt/Encrypt 
 
 Convert a `.sav` file to editable YAML:
 
@@ -43,9 +61,9 @@ Convert the edited YAML back to a `.sav` file:
 python blcrypt.py encrypt -in save.yaml -out 1.sav -id YOUR_STEAM_ID
 ```
 
-### Save Decrypt/Encrypt with Item Serial Decoding/Encoding (EXPERIMENTAL)
+## Save Decrypt/Encrypt with Item Serial Decoding/Encoding (EXPERIMENTAL)
 
-#### Step 1: Decrypt with Item Serial Decoding 
+## Step 1: Decrypt with Item Serial Decoding 
 
 This will decode item serials and add an editable `_DECODED_ITEMS` section to your YAML file. **Important**: The output contains the complete save file as YAML plus the decoded items section.
 
@@ -70,7 +88,7 @@ _DECODED_ITEMS:
       item_class: 123       # Weapon class - edit this!
 ```
 
-#### Step 2: Edit Item Stats
+## Step 2: Edit Item Stats
 
 Modify the values in the `_DECODED_ITEMS` section:
 - **primary_stat**: Main weapon damage/equipment power
@@ -80,7 +98,7 @@ Modify the values in the `_DECODED_ITEMS` section:
 - **item_class**: Specific weapon/equipment type
 - **level**: Item level (when available)
 
-#### Step 3: Encrypt with Item Serial Encoding
+## Step 3: Encrypt with Item Serial Encoding
 
 This will read the complete YAML file, apply your changes from `_DECODED_ITEMS` back to the item serials, remove the `_DECODED_ITEMS` section, and encrypt the complete save file to be used in game:
 
@@ -189,6 +207,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 
 
 
