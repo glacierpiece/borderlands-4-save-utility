@@ -6,15 +6,13 @@ A tool to decrypt and encrypt Borderlands 4 save files for editing, with advance
 
 ## Requirements
 
-- [Python 3.7+](https://www.python.org/downloads/) - Download and install Python
-- [pycryptodome](https://pypi.org/project/pycryptodome/) - Cryptography library (installed via pip)
-- [PyYAML](https://pypi.org/project/PyYAML/) - YAML parser/emitter (installed via pip)
+- [uv](https://docs.astral.sh/uv/getting-started/installation/) - Python package and project manager (handles Python installation and dependencies automatically)
 
-## Installation (venv recommended)
+*Alternative: Any tool that supports [PEP 723](https://peps.python.org/pep-0723/) inline script metadata (like `pipx run` with recent versions)*
 
-```bash
-pip install -r requirements.txt
-```
+## Installation
+
+No installation needed! The script is self-contained and will automatically install its dependencies when first run.
 
 ## Usage
 
@@ -23,16 +21,18 @@ pip install -r requirements.txt
 To see detailed usage information with examples:
 
 ```bash
-python blcrypt.py decrypt --help
-python blcrypt.py encrypt --help
+uv run blcrypt.py decrypt --help
+uv run blcrypt.py encrypt --help
 ```
+
+*Or if you made the script executable: `./blcrypt.py decrypt --help`*
 
 ### Save Decrypt/Encrypt 
 
 Convert a `.sav` file to editable YAML:
 
 ```bash
-python blcrypt.py decrypt -in 1.sav -out save.yaml -id YOUR_STEAM_ID
+uv run blcrypt.py decrypt -in 1.sav -out save.yaml -id YOUR_STEAM_ID
 ```
 
 Edit the YAML file in any text editor and modify the values you want to change.
@@ -40,7 +40,7 @@ Edit the YAML file in any text editor and modify the values you want to change.
 Convert the edited YAML back to a `.sav` file:
 
 ```bash
-python blcrypt.py encrypt -in save.yaml -out 1.sav -id YOUR_STEAM_ID
+uv run blcrypt.py encrypt -in save.yaml -out 1.sav -id YOUR_STEAM_ID
 ```
 
 ### Save Decrypt/Encrypt with Item Serial Decoding/Encoding (EXPERIMENTAL)
@@ -50,7 +50,7 @@ python blcrypt.py encrypt -in save.yaml -out 1.sav -id YOUR_STEAM_ID
 This will decode item serials and add an editable `_DECODED_ITEMS` section to your YAML file. **Important**: The output contains the complete save file as YAML plus the decoded items section.
 
 ```bash
-python blcrypt.py decrypt -in 1.sav -out save.yaml -id YOUR_STEAM_ID --decode-serials
+uv run blcrypt.py decrypt -in 1.sav -out save.yaml -id YOUR_STEAM_ID --decode-serials
 ```
 
 The generated YAML will include your **complete save file** plus a `_DECODED_ITEMS` section like this:
@@ -85,7 +85,7 @@ Modify the values in the `_DECODED_ITEMS` section:
 This will read the complete YAML file, apply your changes from `_DECODED_ITEMS` back to the item serials, remove the `_DECODED_ITEMS` section, and encrypt the complete save file to be used in game:
 
 ```bash
-python blcrypt.py encrypt -in save.yaml -out 1_modified.sav -id YOUR_STEAM_ID --encode-serials
+uv run blcrypt.py encrypt -in save.yaml -out 1_modified.sav -id YOUR_STEAM_ID --encode-serials
 ```
 
 ## Supported Item Types
@@ -107,12 +107,12 @@ For basic save editing without modifying item stats:
 
 ```bash
 # 1. Decrypt save file to YAML
-python blcrypt.py decrypt -in 1.sav -out save.yaml -id 76561198XXXXXXXXX
+uv run blcrypt.py decrypt -in 1.sav -out save.yaml -id 76561198XXXXXXXXX
 
 # 2. Edit save.yaml in any text editor
 
 # 3. Encrypt back to save file
-python blcrypt.py encrypt -in save.yaml -out 1.sav -id 76561198XXXXXXXXX
+uv run blcrypt.py encrypt -in save.yaml -out 1.sav -id 76561198XXXXXXXXX
 
 # 4. Replace your original save file with 1.sav
 ```
@@ -121,12 +121,12 @@ python blcrypt.py encrypt -in save.yaml -out 1.sav -id 76561198XXXXXXXXX
 
 ```bash
 # 1. Decrypt save file with item serial decoding
-python blcrypt.py decrypt -in 1.sav -out save.yaml -id 76561198XXXXXXXXX --decode-serials
+uv run blcrypt.py decrypt -in 1.sav -out save.yaml -id 76561198XXXXXXXXX --decode-serials
 
 # 2. Edit the _DECODED_ITEMS section in save.yaml to modify weapon damage, rarity, etc.
 
 # 3. Encrypt back with item serial encoding
-python blcrypt.py encrypt -in save.yaml -out 1.sav -id 76561198XXXXXXXXX --encode-serials
+uv run blcrypt.py encrypt -in save.yaml -out 1.sav -id 76561198XXXXXXXXX --encode-serials
 
 # 4. Replace your original save file with the new 1.sav
 ```
@@ -150,14 +150,14 @@ python blcrypt.py encrypt -in save.yaml -out 1.sav -id 76561198XXXXXXXXX --encod
 
 ```bash
 # Basic decrypt/encrypt (no item modification)
-python blcrypt.py decrypt -in 1.sav -id 76561198XXXXXXXXX
-python blcrypt.py encrypt -in 1.yaml -id 76561198XXXXXXXXX
+uv run blcrypt.py decrypt -in 1.sav -id 76561198XXXXXXXXX
+uv run blcrypt.py encrypt -in 1.yaml -id 76561198XXXXXXXXX
 
 # Advanced: Decode item serials for editing
-python blcrypt.py decrypt -in 1.sav -id 76561198XXXXXXXXX --decode-serials
+uv run blcrypt.py decrypt -in 1.sav -id 76561198XXXXXXXXX --decode-serials
 
 # Advanced: Encode modified item serials back to save
-python blcrypt.py encrypt -in 1.yaml -id 76561198XXXXXXXXX --encode-serials
+uv run blcrypt.py encrypt -in 1.yaml -id 76561198XXXXXXXXX --encode-serials
 ```
 
 ## Troubleshooting
