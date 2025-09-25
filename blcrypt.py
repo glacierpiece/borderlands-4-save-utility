@@ -1,6 +1,14 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
 # written by glacierpiece
 # https://github.com/glacierpiece/borderlands-4-save-utlity
+
+# /// script
+# requires-python = ">=3.8"
+# dependencies = [
+#     "pycryptodome>=3.15.0",
+#     "pyyaml>=6.0",
+# ]
+# ///
 
 import argparse, sys, zlib, yaml, struct
 from pathlib import Path
